@@ -1,25 +1,43 @@
 #!/usr/bin/env bash
-#
 # bootstrap installs things.
-
 cd "$(dirname $0)"
+
+# FORMATTING
+HL=$'\e[0;92m'
+HAPPY=$'\e[0;92m'
+WARN=$'\e[91m'
+HEADER=$'\e[107m\e[30m'
+END=$'\e[0m\e[39m\e[49m'
+LB=$'\n'
+
 DOTFILES_ROOT=$(pwd -P)
 set -e
 
 function main () {
-  echo ''
+  heading '@walrusk .dotfiles bootstrap' '💾'
 
+  heading 'Setup gitconfig..'
+  setup_gitconfig;
+
+  heading 'Installing dotfiles..'
+  install_dotfiles;
+
+  heading 'Installing homebrew..'
   setup_homebrew;
+
+  heading 'Installing dependencies..'
   brew bundle;
 
   # find the installers and run them iteratively
+  heading 'Running installers..'
   find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 
-  setup_gitconfig
-  install_dotfiles
+  heading 'Manual steps..'
+	echo "1. Keyboard Settings ==> Use F1,F2, etc. as std. function keys
+2. Keyboard Settings ==> Modifier Keys ==> Caps Lock as Ctrl
+3. iTerm2 Preferences ==> Keys ==> + ==> Cmd+K --> Send Hex Codes: 0x02 0x0B 0x0C"
 
-  echo ''
-  echo '  All installed!'
+  heading 'FIN' '🦈'
 }
 
 function setup_homebrew () {
@@ -38,8 +56,6 @@ function setup_homebrew () {
 function setup_gitconfig () {
   if ! [ -f git/gitconfig.local.symlink ]
   then
-    info 'setup gitconfig'
-
     git_credential='cache'
     if [ "$(uname -s)" == "Darwin" ]
     then
@@ -51,7 +67,7 @@ function setup_gitconfig () {
     user ' - What is your github author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/.gitconfig.local.example > git/.gitconfig.local
 
     success 'gitconfig'
   fi
@@ -127,25 +143,27 @@ function link_file () {
 
   if [ "$skip" != "true" ]  # "false" or empty
   then
-    ln -s "$1" "$2"
+    #ln -s "$1" "$2"
     success "linked $1 to $2"
   fi
 }
 
 function install_dotfiles () {
-  info 'installing dotfiles'
-
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '.*' -not -path '*.git*' -not -path '*.DS_Store' -not -path '\.' -not -path '*.example')
+  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '.*' ! -path "$DOTFILES_ROOT" ! -path '*.git' ! -path "$DOTFILES_ROOT/.gitignore" ! -path '*.DS_Store' ! -path '*.example')
   do
-    dst="$HOME/$(basename "${src%.*}")"
+    dst="$HOME/$(basename "${src}")"
     link_file "$src" "$dst"
   done
 }
 
-function info () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+function heading () {
+  ICON=$2
+  if [ -z "$ICON" ]; then
+      ICON='🚚'
+  fi
+  echo "  [ ${ICON}  ] ${HL}$1${END}"
 }
 
 function user () {

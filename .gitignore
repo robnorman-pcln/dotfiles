@@ -1,2 +1,3 @@
-git/gitconfig.local.symlink
+bash/.bash_profile.local
+git/.gitconfig.local
 .DS_Store

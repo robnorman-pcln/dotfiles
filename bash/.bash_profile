@@ -6,6 +6,11 @@
 #
 # .bash_profile
 
+## LOCAL
+if [ -f ./.bash_profile.local ]; then
+    source ./.bash_profile.local
+fi
+
 ## PATH
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:~/.dotfiles/bin"

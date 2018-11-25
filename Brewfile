@@ -1,43 +1,46 @@
 cask_args appdir: '/Applications'
 
-tap 'homebrew/bundle'
-tap 'puma/puma'
+# taps
+tap 'caskroom/homebrew-cask' || true
+tap 'homebrew/core' || true
 
-brew 'ack'
-brew 'coreutils'
+# version control
+brew 'git'
+
+# languages
+brew 'php'
 brew 'go'
-brew 'grc'
-brew 'imagemagick'
-brew 'jp2a'
-brew 'jq'
-brew 'libcaca', args: ['with-imlib2']
-brew 'libgit2'
-brew 'openssl'
-brew 'node'
-brew 'readline'
-brew 'postgresql'
-brew 'puma/puma/puma-dev'
-brew 'ruby-build'
 brew 'rbenv'
-brew 'roundup'
-brew 'spaceman-diff'
-brew 'spark'
-brew 'unrar'
-brew 'wget'
-brew 'yarn'
-brew 'youtube-dl'
+brew 'ruby-build'
+brew 'node'
+brew 'python'
 
-cask '1password'
-cask 'adium'
-cask 'atom'
-cask 'firefox'
-cask 'garmin-express'
-cask 'google-chrome'
-cask 'handbrake'
-cask 'mapbox-studio'
-cask 'seashore'
-cask 'slack'
-cask 'steam'
-cask 'transmission'
-cask 'tunnelbear'
-cask 'vlc'
+# package managers
+brew 'composer'
+brew 'yarn'
+
+# editors
+brew 'vim'
+
+# utilities
+brew 'tmux'
+brew 'ctags'
+brew 'tree'
+brew 'watch'
+brew 'direnv'
+brew 'fd'
+brew 'ack'
+brew 'fzf'
+brew 'cmake'
+brew 'highlight'
+brew 'dos2unix'
+brew 'wget'
+brew 'spaceman-diff'
+brew 'readline'
+brew 'jq'
+
+cask 'google-cloud-sdk'
+cask 'docker'
+
+brew 'kubernetes-cli'
+

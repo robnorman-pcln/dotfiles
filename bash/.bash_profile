@@ -39,7 +39,7 @@ alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias ge='git-edit-new'
 
-# FUNCTIONS
+## FUNCTIONS
 function gco () { git checkout $(git branch | fzf-tmux -d 15 | sed 's/\*//g');  }
 function gbd () { git branch -D $(git branch | fzf-tmux -d 15 | sed 's/\*//g'); }
 function grb () { git checkout --track $(git branch -r | fzf-tmux -d 15 | sed 's/\*//g'); }

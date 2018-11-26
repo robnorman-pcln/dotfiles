@@ -54,7 +54,7 @@ function setup_homebrew () {
 }
 
 function setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
+  if ! [ -f git/.gitconfig.local ]
   then
     git_credential='cache'
     if [ "$(uname -s)" == "Darwin" ]

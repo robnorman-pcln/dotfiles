@@ -7,22 +7,22 @@
         protocol = https
 [alias]
         amend = commit --amend
-	ap = add -p
-	b = branch -vv
-	bd = branch -D
-	c = commit -v
-	fo = fetch origin
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	co = checkout
-	com = checkout master
-	cod = checkout develop
-	cob = checkout -b
-	s = status
-	pso = push origin
-	plo = pull origin
-	pushf = push --force-with-lease
-	ignored = !git ls-files -v | grep "^[[:lower:]]"
-	prune-local = !git branch --merged | tr -d '*' | grep -v dev | xargs -n1 git branch -d
+    	ap = add -p
+    	b = branch -vv
+    	bd = branch -D
+    	c = commit -v
+    	fo = fetch origin
+    	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    	co = checkout
+    	com = checkout master
+    	cod = checkout develop
+    	cob = checkout -b
+    	s = status
+    	pso = push origin
+    	plo = pull origin
+    	pushf = push --force-with-lease
+    	ignored = !git ls-files -v | grep "^[[:lower:]]"
+    	prune-local = !git branch --merged | tr -d '*' | grep -v dev | xargs -n1 git branch -d
         promote = !git-promote
         wtf     = !git-wtf
         rank-contributors = !git-rank-contributors
@@ -39,10 +39,10 @@
 [help]
         autocorrect = 1
 [pull]
-	rebase = true
+	    rebase = true
 [push]
-        default = simple
+        default = current
 [url "git@github.com:"]
-      	pushInsteadOf = https://github.com
+        pushInsteadOf = https://github.com
 [url "git@github.com:"]
-      	pushInsteadOf = git://github.com
+        pushInsteadOf = git://github.com

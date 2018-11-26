@@ -12,9 +12,9 @@ else
     echo "$1 ${HAPPY}found.${END}"
 fi
 
-gemit "tmuxinator"
-	tmuxinator doctor
-	mkdir -p ~/.tmux/plugins
-	cp -r ./tildy/.tmux/plugins/. ~/.tmux/plugins
-	mkdir -p ~/.config/tmuxinator
-	cp ./tildy/walrusk.yml ~/.config/tmuxinator
+gem install tmuxinator
+tmuxinator doctor
+mkdir -p ~/.tmux/plugins
+cp -r ./tildy/.tmux/plugins/. ~/.tmux/plugins
+mkdir -p ~/.config/tmuxinator
+cp ./tildy/walrusk.yml ~/.config/tmuxinator

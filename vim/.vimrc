@@ -59,6 +59,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tomtom/tcomment_vim'
 Plug 'mxw/vim-jsx'
 Plug 'alvan/vim-closetag'
+Plug 'luochen1990/rainbow'
+
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -113,7 +115,7 @@ Plug 'jelera/vim-javascript-syntax'
 
 
 " php
-Plug 'joonty/vdebug'
+" Plug 'joonty/vdebug'
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'}
 Plug 'nishigori/vim-php-dictionary', {'for': 'php'}
@@ -435,6 +437,8 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.js,*.jsx,*.erb'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
+
+let g:rainbow_active = 1
 
 "" Split
 " noremap <Leader>h :<C-u>split<CR>

@@ -6,6 +6,12 @@
 #
 # .bash_profile
 
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+    *) return;;
+esac
+
 ## LOCAL
 if [ -f ./.bash_profile.local ]; then
     source ./.bash_profile.local
@@ -21,15 +27,20 @@ export PATH="$PATH:~/.rbenv/shims"
 export EDITOR='vim'
 export BASH_IT=~/.bash_it
 export BASH_IT_THEME='minimal'
+export STARSHIP_CONFIG=~/.starship
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ## ALIASES
 alias d='docker $*'
-alias d-c='docker-compose $*'
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias dc='docker-compose $*'
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to clipboard.'"
 alias ll='ls -l'
+alias ws='webstorm $*'
 alias tmuxin='tmuxinator'
 alias wsk='tmuxinator start walrusk'
 alias ctags="`brew --prefix`/bin/ctags"
+alias nr='npm run $*'
+alias rx='rushx $*'
 
 ## GIT ALIASES / FUNCTIONS
 alias g='git status'
@@ -38,6 +49,9 @@ alias gp='git pull'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias ge='git-edit-new'
+alias snf='git log --all --full-history -- $*'
+
+unset MAILCHECK
 
 ## FUNCTIONS
 function gco () { git checkout $(git branch | fzf-tmux -d 15 | sed 's/\*//g');  }
@@ -54,6 +68,12 @@ eval "$(direnv hook bash)"
 eval "$(rbenv init -)"
 [ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
 [ -f $(brew --prefix)/etc/grc.bashrc ] && source `brew --prefix`/etc/grc.bashrc
+
+eval "$(starship init bash)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -f ~/.dotfiles/bin/git-completion ]; then
     . ~/.dotfiles/bin/git-completion
